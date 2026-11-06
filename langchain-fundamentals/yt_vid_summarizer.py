@@ -58,7 +58,7 @@ class EmbeddingModel:
 class LLMModel:
     """Handles different LLM models"""
 
-    def __init__(self, model_type="openai", model_name="gpt-4"):
+    def __init__(self, model_type="openai", model_name="gpt-4o-mini"):
         self.model_type = model_type
         self.model_name = model_name
 
@@ -79,7 +79,7 @@ class LLMModel:
 
 class YoutubeVideoSummarizer:
     def __init__(
-        self, llm_type="openai", llm_model_name="gpt-4", embedding_type="openai"
+        self, llm_type="openai", llm_model_name="gpt-4o-mini", embedding_type="openai"
     ):
         """Initialize with different LLM and embedding options"""
         # Initialize Models
@@ -239,7 +239,7 @@ def main():
 
     # Configure model settings
     llm_type = "openai" if llm_choice == "1" else "ollama"
-    llm_model_name = "gpt-4" if llm_choice == "1" else "llama3.2"
+    llm_model_name = "gpt-4o-mini" if llm_choice == "1" else "llama3.2"
 
     if embedding_choice == "1":
         embedding_type = "openai"

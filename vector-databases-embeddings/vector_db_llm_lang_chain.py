@@ -13,7 +13,7 @@ load_dotenv()
 
 openai_key = os.getenv("OPENAI_API_KEY")
 
-model = ChatOpenAI(api_key=openai_key, model="gpt-4")
+model = ChatOpenAI(api_key=openai_key, model="gpt-4o-mini")
 
 
 # load documents
