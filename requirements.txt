@@ -1,10 +1,12 @@
-# Pinned dependencies for the course code (tested with Python 3.12).
+# CLASSIC sections (s08 to s24): pinned dependencies, tested with Python 3.12.
 #
-# Install:  pip install -r requirements.txt
+#   python3.12 -m venv .venv-classic
+#   source .venv-classic/bin/activate        # Windows: .venv-classic\Scripts\activate
+#   pip install -r requirements.txt
 #
-# These versions match the ones used when the lectures were recorded.
-# Newer releases (for example LangChain 1.x) moved or removed several imports
-# used in the course, so please keep these pins.
+# These are the versions used when the lectures were recorded. Newer releases
+# (for example LangChain 1.x) moved or removed imports used in these sections,
+# so please keep these pins. The new 2026 sections use pyproject.toml (uv) instead.
 #
 # Voice assistant extras need system audio libraries (PortAudio) on some machines.
 accelerate==1.6.0
@@ -20,6 +22,8 @@ aiohttp==3.11.18
     #   langchain-community
 aiosignal==1.3.2
     # via aiohttp
+aiosqlite==0.21.0
+    # via langgraph-checkpoint-sqlite
 altair==5.5.0
     # via streamlit
 annotated-types==0.7.0
@@ -84,7 +88,7 @@ chroma-hnswlib==0.7.6
     # via chromadb
 chromadb==0.6.3
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   langchain-chroma
 click==8.1.8
     # via
@@ -94,11 +98,12 @@ click==8.1.8
     #   typer
     #   uvicorn
 cohere==5.15.0
-    # via -r req-in.txt
+    # via -r classic-in.txt
 colorama==0.4.6 ; (os_name == 'nt' and platform_machine != 'aarch64' and sys_platform == 'linux') or (os_name != 'nt' and sys_platform == 'win32') or (os_name == 'nt' and sys_platform != 'darwin' and sys_platform != 'linux')
     # via
     #   build
     #   click
+    #   loguru
     #   tqdm
     #   uvicorn
 coloredlogs==15.0.1
@@ -119,7 +124,7 @@ dataclasses-json==0.6.7
     #   unstructured
 datasets==3.5.0
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   evaluate
 deprecated==1.2.18
     # via
@@ -141,21 +146,25 @@ durationpy==0.9
 effdet==0.4.1
     # via unstructured
 elevenlabs==1.57.0
-    # via -r req-in.txt
+    # via -r classic-in.txt
 emoji==2.14.1
     # via unstructured
+et-xmlfile==2.0.0
+    # via openpyxl
 eval-type-backport==0.2.2
     # via unstructured-client
 evaluate==0.4.3
-    # via -r req-in.txt
+    # via -r classic-in.txt
 faiss-cpu==1.10.0
-    # via -r req-in.txt
+    # via -r classic-in.txt
 fastapi==0.115.12
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   chromadb
 fastavro==1.10.0
     # via cohere
+fastembed==0.6.1
+    # via -r classic-in.txt
 feedfinder2==0.0.4
     # via newspaper3k
 feedparser==6.0.11
@@ -183,6 +192,8 @@ fsspec==2024.12.0
     #   evaluate
     #   huggingface-hub
     #   torch
+ftfy==6.3.1
+    # via open-clip-torch
 gitdb==4.0.12
     # via gitpython
 gitpython==3.1.44
@@ -227,9 +238,11 @@ httpx==0.28.1
     #   chromadb
     #   cohere
     #   elevenlabs
+    #   langgraph-sdk
     #   langsmith
     #   ollama
     #   openai
+    #   tavily-python
     #   unstructured-client
 httpx-sse==0.4.0
     # via
@@ -240,6 +253,8 @@ huggingface-hub==0.30.2
     #   accelerate
     #   datasets
     #   evaluate
+    #   fastembed
+    #   open-clip-torch
     #   peft
     #   sentence-transformers
     #   timm
@@ -287,43 +302,66 @@ kubernetes==32.0.1
     # via chromadb
 langchain==0.3.24
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   langchain-community
 langchain-chroma==0.2.3
-    # via -r req-in.txt
+    # via -r classic-in.txt
 langchain-community==0.3.22
-    # via -r req-in.txt
+    # via -r classic-in.txt
 langchain-core==0.3.56
     # via
+    #   -r classic-in.txt
     #   langchain
     #   langchain-chroma
     #   langchain-community
     #   langchain-ollama
     #   langchain-openai
     #   langchain-text-splitters
+    #   langgraph
+    #   langgraph-checkpoint
+    #   langgraph-prebuilt
 langchain-ollama==0.3.2
-    # via -r req-in.txt
+    # via -r classic-in.txt
 langchain-openai==0.3.14
-    # via -r req-in.txt
+    # via -r classic-in.txt
 langchain-text-splitters==0.3.8
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   langchain
 langdetect==1.0.9
     # via unstructured
+langgraph==0.3.34
+    # via -r classic-in.txt
+langgraph-checkpoint==2.0.24
+    # via
+    #   langgraph
+    #   langgraph-checkpoint-sqlite
+    #   langgraph-prebuilt
+langgraph-checkpoint-sqlite==2.0.6
+    # via -r classic-in.txt
+langgraph-prebuilt==0.1.8
+    # via langgraph
+langgraph-sdk==0.1.63
+    # via langgraph
 langsmith==0.3.34
     # via
     #   langchain
     #   langchain-community
     #   langchain-core
+loguru==0.7.3
+    # via fastembed
 lxml==5.4.0
     # via
     #   lxml-html-clean
     #   newspaper3k
     #   pikepdf
+    #   python-docx
+    #   python-pptx
     #   unstructured
 lxml-html-clean==0.4.2
-    # via -r req-in.txt
+    # via -r classic-in.txt
+markdown==3.8
+    # via unstructured
 markdown-it-py==3.0.0
     # via rich
 markupsafe==3.0.2
@@ -332,12 +370,15 @@ marshmallow==3.26.1
     # via dataclasses-json
 matplotlib==3.10.1
     # via
+    #   -r classic-in.txt
     #   pycocotools
     #   unstructured-inference
 mdurl==0.1.2
     # via markdown-it-py
 mmh3==5.1.0
-    # via chromadb
+    # via
+    #   chromadb
+    #   fastembed
 monotonic==1.6
     # via posthog
 mpmath==1.3.0
@@ -357,9 +398,11 @@ narwhals==1.36.0
 nest-asyncio==1.6.0
     # via unstructured-client
 networkx==3.4.2
-    # via torch
+    # via
+    #   torch
+    #   unstructured
 newspaper3k==0.2.8
-    # via -r req-in.txt
+    # via -r classic-in.txt
 nltk==3.9.1
     # via
     #   newspaper3k
@@ -373,6 +416,7 @@ numpy==2.2.5
     #   datasets
     #   evaluate
     #   faiss-cpu
+    #   fastembed
     #   langchain-chroma
     #   langchain-community
     #   matplotlib
@@ -435,7 +479,9 @@ oauthlib==3.2.2
 olefile==0.47
     # via python-oxmsg
 ollama==0.4.8
-    # via langchain-ollama
+    # via
+    #   -r classic-in.txt
+    #   langchain-ollama
 omegaconf==2.3.0
     # via effdet
 onnx==1.17.0
@@ -445,14 +491,19 @@ onnx==1.17.0
 onnxruntime==1.21.1
     # via
     #   chromadb
+    #   fastembed
     #   unstructured
     #   unstructured-inference
+open-clip-torch==2.32.0
+    # via -r classic-in.txt
 openai==1.76.0
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   langchain-openai
 opencv-python==4.11.0.86
     # via unstructured-inference
+openpyxl==3.1.5
+    # via unstructured
 opentelemetry-api==1.32.1
     # via
     #   chromadb
@@ -495,7 +546,10 @@ opentelemetry-util-http==0.53b1
 orjson==3.10.16
     # via
     #   chromadb
+    #   langgraph-sdk
     #   langsmith
+ormsgpack==1.9.1
+    # via langgraph-checkpoint
 outcome==1.3.0.post0
     # via
     #   trio
@@ -524,30 +578,40 @@ packaging==24.2
     #   unstructured-pytesseract
 pandas==2.2.3
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   datasets
     #   evaluate
     #   streamlit
+    #   unstructured
     #   unstructured-inference
 pdf2image==1.17.0
     # via unstructured
-pdfminer-six==20250416
+pdfminer-six==20250327
     # via
+    #   pdfplumber
     #   unstructured
     #   unstructured-inference
+pdfplumber==0.11.6
+    # via -r classic-in.txt
 peft==0.15.2
-    # via -r req-in.txt
+    # via -r classic-in.txt
 pi-heif==0.22.0
     # via unstructured
 pikepdf==9.7.0
-    # via unstructured
+    # via
+    #   -r classic-in.txt
+    #   unstructured
 pillow==11.2.1
     # via
+    #   -r classic-in.txt
+    #   fastembed
     #   matplotlib
     #   newspaper3k
     #   pdf2image
+    #   pdfplumber
     #   pi-heif
     #   pikepdf
+    #   python-pptx
     #   sentence-transformers
     #   streamlit
     #   torchvision
@@ -555,7 +619,7 @@ pillow==11.2.1
 posthog==4.0.0
     # via chromadb
 prettytable==3.16.0
-    # via -r req-in.txt
+    # via -r classic-in.txt
 propcache==0.3.1
     # via
     #   aiohttp
@@ -580,6 +644,8 @@ psutil==7.0.0
     #   accelerate
     #   peft
     #   unstructured
+py-rust-stemmers==0.1.5
+    # via fastembed
 pyarrow==19.0.1
     # via
     #   datasets
@@ -596,6 +662,7 @@ pycparser==2.22
     # via cffi
 pydantic==2.11.3
     # via
+    #   -r classic-in.txt
     #   chromadb
     #   cohere
     #   elevenlabs
@@ -618,6 +685,8 @@ pydeck==0.9.1
     # via streamlit
 pygments==2.19.1
     # via rich
+pypandoc==1.15
+    # via unstructured
 pyparsing==3.2.3
     # via matplotlib
 pypdf==5.4.0
@@ -625,9 +694,11 @@ pypdf==5.4.0
     #   unstructured
     #   unstructured-client
 pypdf2==3.0.1
-    # via -r req-in.txt
+    # via -r classic-in.txt
 pypdfium2==4.30.0
-    # via unstructured-inference
+    # via
+    #   pdfplumber
+    #   unstructured-inference
 pypika==0.48.9
     # via chromadb
 pyproject-hooks==1.2.0
@@ -643,9 +714,11 @@ python-dateutil==2.9.0.post0
     #   newspaper3k
     #   pandas
     #   posthog
+python-docx==1.1.2
+    # via unstructured
 python-dotenv==1.1.0
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   pydantic-settings
     #   uvicorn
 python-iso639==2025.2.18
@@ -655,6 +728,8 @@ python-magic==0.4.27
 python-multipart==0.0.20
     # via unstructured-inference
 python-oxmsg==0.0.2
+    # via unstructured
+python-pptx==1.0.2
     # via unstructured
 pytz==2025.2
     # via pandas
@@ -685,14 +760,17 @@ referencing==0.36.2
 regex==2024.11.6
     # via
     #   nltk
+    #   open-clip-torch
     #   tiktoken
     #   transformers
 requests==2.32.3
     # via
+    #   -r classic-in.txt
     #   cohere
     #   datasets
     #   elevenlabs
     #   evaluate
+    #   fastembed
     #   feedfinder2
     #   google-api-core
     #   huggingface-hub
@@ -706,6 +784,7 @@ requests==2.32.3
     #   requests-oauthlib
     #   requests-toolbelt
     #   streamlit
+    #   tavily-python
     #   tiktoken
     #   tldextract
     #   transformers
@@ -731,6 +810,7 @@ rsa==4.9.1
 safetensors==0.5.3
     # via
     #   accelerate
+    #   open-clip-torch
     #   peft
     #   timm
     #   transformers
@@ -742,9 +822,9 @@ scipy==1.15.2
     #   sentence-transformers
     #   unstructured-inference
 selenium==4.31.0
-    # via -r req-in.txt
+    # via -r classic-in.txt
 sentence-transformers==4.1.0
-    # via -r req-in.txt
+    # via -r classic-in.txt
 setuptools==79.0.1
     # via
     #   torch
@@ -771,23 +851,26 @@ sniffio==1.3.1
 sortedcontainers==2.4.0
     # via trio
 sounddevice==0.5.1
-    # via -r req-in.txt
+    # via -r classic-in.txt
 soundfile==0.13.1
-    # via -r req-in.txt
+    # via -r classic-in.txt
 soupsieve==2.7
     # via beautifulsoup4
 sqlalchemy==2.0.40
     # via
+    #   -r classic-in.txt
     #   langchain
     #   langchain-community
 starlette==0.46.2
     # via fastapi
 streamlit==1.44.1
-    # via -r req-in.txt
+    # via -r classic-in.txt
 sympy==1.13.3
     # via
     #   onnxruntime
     #   torch
+tavily-python==0.7.0
+    # via -r classic-in.txt
 tenacity==9.1.2
     # via
     #   chromadb
@@ -797,10 +880,13 @@ tenacity==9.1.2
 threadpoolctl==3.6.0
     # via scikit-learn
 tiktoken==0.9.0
-    # via langchain-openai
+    # via
+    #   langchain-openai
+    #   tavily-python
 timm==1.0.15
     # via
     #   effdet
+    #   open-clip-torch
     #   unstructured-inference
 tinysegmenter==0.3
     # via newspaper3k
@@ -810,14 +896,16 @@ tokenizers==0.21.1
     # via
     #   chromadb
     #   cohere
+    #   fastembed
     #   transformers
 toml==0.10.2
     # via streamlit
 torch==2.7.0
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   accelerate
     #   effdet
+    #   open-clip-torch
     #   peft
     #   sentence-transformers
     #   timm
@@ -826,6 +914,7 @@ torch==2.7.0
 torchvision==0.22.0
     # via
     #   effdet
+    #   open-clip-torch
     #   timm
 tornado==6.4.2
     # via streamlit
@@ -834,8 +923,10 @@ tqdm==4.67.1
     #   chromadb
     #   datasets
     #   evaluate
+    #   fastembed
     #   huggingface-hub
     #   nltk
+    #   open-clip-torch
     #   openai
     #   peft
     #   sentence-transformers
@@ -843,7 +934,7 @@ tqdm==4.67.1
     #   unstructured
 transformers==4.51.3
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   peft
     #   sentence-transformers
     #   unstructured-inference
@@ -861,6 +952,7 @@ types-requests==2.32.0.20250328
     # via cohere
 typing-extensions==4.13.2
     # via
+    #   aiosqlite
     #   altair
     #   anyio
     #   beautifulsoup4
@@ -874,7 +966,9 @@ typing-extensions==4.13.2
     #   opentelemetry-sdk
     #   pydantic
     #   pydantic-core
+    #   python-docx
     #   python-oxmsg
+    #   python-pptx
     #   referencing
     #   selenium
     #   sentence-transformers
@@ -895,7 +989,7 @@ typing-inspection==0.4.0
 tzdata==2025.2
     # via pandas
 unstructured==0.17.2
-    # via -r req-in.txt
+    # via -r classic-in.txt
 unstructured-client==0.34.0
     # via unstructured
 unstructured-inference==0.8.10
@@ -910,7 +1004,7 @@ urllib3==2.4.0
     #   types-requests
 uvicorn==0.34.2
     # via
-    #   -r req-in.txt
+    #   -r classic-in.txt
     #   chromadb
 uvloop==0.21.0 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32'
     # via uvicorn
@@ -919,7 +1013,9 @@ watchdog==6.0.0 ; sys_platform != 'darwin'
 watchfiles==1.0.5
     # via uvicorn
 wcwidth==0.2.13
-    # via prettytable
+    # via
+    #   ftfy
+    #   prettytable
 webencodings==0.5.1
     # via html5lib
 websocket-client==1.8.0
@@ -930,6 +1026,8 @@ websockets==15.0.1
     # via
     #   elevenlabs
     #   uvicorn
+win32-setctime==1.2.0 ; sys_platform == 'win32'
+    # via loguru
 wrapt==1.17.2
     # via
     #   deprecated
@@ -937,14 +1035,19 @@ wrapt==1.17.2
     #   unstructured
 wsproto==1.2.0
     # via trio-websocket
+xlrd==2.0.1
+    # via unstructured
+xlsxwriter==3.2.2
+    # via python-pptx
 xxhash==3.5.0
     # via
     #   datasets
     #   evaluate
+    #   langgraph
 yarl==1.20.0
     # via aiohttp
 yt-dlp==2025.3.31
-    # via -r req-in.txt
+    # via -r classic-in.txt
 zipp==3.21.0
     # via importlib-metadata
 zstandard==0.23.0

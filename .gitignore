@@ -119,3 +119,10 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Course additions
+.venv*/
+.DS_Store
+.idea/
+.vscode/
+*.sqlite3
