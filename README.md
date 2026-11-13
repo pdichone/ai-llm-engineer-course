@@ -56,7 +56,7 @@ own virtual environments (`.venv-classic` and `.venv`).
 | 20 | [`s20-advanced-rag/`](s20-advanced-rag/) | A | Query expansion and Cohere reranking |
 | 21 | [`s21-multimodal-rag/`](s21-multimodal-rag/) | A | Multimodal search and recommender RAG |
 | 22 | [`s22-ai-agents/`](s22-ai-agents/) | A | AI agents, LangGraph, tools, memory, human-in-the-loop, financial report agent |
-| 23 | [`s23-fine-tuning-openai/`](s23-fine-tuning-openai/) | A | Fine-tuning concepts and the OpenAI fine-tuning walkthrough |
+| 23 | [`s23-fine-tuning-openai/`](s23-fine-tuning-openai/) | A + B + Colab | Fine-tuning concepts; open-weights LoRA fine-tune (Qwen3, Colab, Ollama); legacy OpenAI walkthrough |
 | 24 | [`s24-fine-tuning-lora/`](s24-fine-tuning-lora/) | A | LoRA / PEFT training, API service, chatting with fine-tuned models |
 
 New sections added later get a letter after the number they follow (for example `s15b-…`), so
