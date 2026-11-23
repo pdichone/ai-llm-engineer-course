@@ -23,7 +23,9 @@ async def main():
             {"messages": [{"role": "user", "content": "What's the meal limit on a work trip, and is wine covered?"}]}
         )
         for message in result["messages"]:
-            message.pretty_print()
+            for call in getattr(message, "tool_calls", []):
+                print("Tool call:", call["name"], call["args"])
+        print("\n" + result["messages"][-1].text)
 
 
 asyncio.run(main())

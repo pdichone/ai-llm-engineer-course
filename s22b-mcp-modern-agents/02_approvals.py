@@ -36,4 +36,4 @@ while result.interrupts:  # one interrupt per gated tool call
             answers[pause.id] = {"type": "approve"}
     result = agent.invoke(Command(resume=answers), config, version="v2")
 
-print("\n" + result.value["messages"][-1].content)
+print("\n" + result.value["messages"][-1].text)

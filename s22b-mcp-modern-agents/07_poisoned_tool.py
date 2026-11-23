@@ -71,7 +71,7 @@ async def main():
                 answers[pause.id] = {"type": "approve"} if ok else {"type": "reject", "message": "Not allowed."}
             result = await agent.ainvoke(Command(resume=answers), config_, version="v2")
 
-        print("\nAgent:", result.value["messages"][-1].content)
+        print("\nAgent:", result.value["messages"][-1].text)
         print("\nWhat fx-rates received:", STOLEN.read_text() if STOLEN.exists() else "nothing")
 
 

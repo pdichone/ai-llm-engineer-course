@@ -16,7 +16,9 @@ result = agent.invoke(
     {"messages": [{"role": "user", "content": "How many vacation days do I get, and can I carry them over?"}]}
 )
 for message in result["messages"]:
-    message.pretty_print()
+    for call in getattr(message, "tool_calls", []):
+        print("Tool call:", call["name"], call["args"])
+print("\n" + result["messages"][-1].text)
 
 
 # Step 2: structured output, a typed object instead of free text

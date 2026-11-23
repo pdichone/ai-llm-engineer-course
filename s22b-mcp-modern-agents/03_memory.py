@@ -35,12 +35,12 @@ store.setup()
 agent = create_agent(
     MODEL,
     tools=[search_handbook, remember, recall],
-    system_prompt=SYSTEM + " Use remember for lasting facts about the employee, and recall before saying you don't know them.",
+    system_prompt=SYSTEM + " Save lasting facts about the employee with remember. For any question about the employee themselves, call recall first.",
     checkpointer=SqliteSaver(sqlite3.connect(HERE / "threads.db", check_same_thread=False)),  # step 1: the conversation, per thread
     store=store,  # step 2: facts, across all threads
 )
 
 thread, text = sys.argv[1], sys.argv[2]
 result = agent.invoke({"messages": [{"role": "user", "content": text}]}, {"configurable": {"thread_id": thread}})
-print(result["messages"][-1].content)
+print(result["messages"][-1].text)
 print(f"\n(thread {thread!r} now has {len(result['messages'])} messages)")
