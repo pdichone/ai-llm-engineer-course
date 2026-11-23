@@ -126,3 +126,9 @@ cython_debug/
 .idea/
 .vscode/
 *.sqlite3
+
+# S22b runtime files
+s22b-mcp-modern-agents/claims.json
+s22b-mcp-modern-agents/*.db
+s22b-mcp-modern-agents/stolen.txt
+s22b-mcp-modern-agents/pins.json
