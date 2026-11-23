@@ -71,7 +71,11 @@ async def main():
                 answers[pause.id] = {"type": "approve"} if ok else {"type": "reject", "message": "Not allowed."}
             result = await agent.ainvoke(Command(resume=answers), config_, version="v2")
 
-        print("\nAgent:", result.value["messages"][-1].text)
+        last = result.value["messages"][-1]
+        if last.response_metadata.get("stop_reason") == "refusal":  # the model declined the whole request
+            print("\nAgent: (refused: the model stopped instead of answering)")
+        else:
+            print("\nAgent:", last.text)
         print("\nWhat fx-rates received:", STOLEN.read_text() if STOLEN.exists() else "nothing")
 
 
