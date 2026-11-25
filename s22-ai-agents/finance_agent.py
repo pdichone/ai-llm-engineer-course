@@ -34,8 +34,8 @@ openai_key = os.getenv("OPENAI_API_KEY")
 
 tavily = os.getenv("TAVILY_API_KEY")
 
-llm_name = "gpt-4o-mini"
-model = ChatOpenAI(api_key=openai_key, model=llm_name)
+llm_name = "gpt-6-luna"  # gpt-4o-mini shuts down Jan 14, 2027
+model = ChatOpenAI(api_key=openai_key, model=llm_name, reasoning_effort="none")
 
 from tavily import TavilyClient
 

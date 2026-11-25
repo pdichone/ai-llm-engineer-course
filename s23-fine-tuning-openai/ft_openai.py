@@ -219,11 +219,13 @@ df = pd.read_csv(file_like_object)
 ## Testing and evaluating -- first use the main model and prompt it:
 ## make sure to change the messages to match the data set we fine-tuned our model with
 response = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-6-luna",  # gpt-4o-mini shuts down Jan 14, 2027
     messages=[
         {
             "role": "system",
             "content": "This is a customer support chatbot designed to help with common inquiries.",
+        },
+        {
             "role": "user",
             "content": "How do I change my tea preferences for the next shipment?",
         }
@@ -242,6 +244,8 @@ response = client.chat.completions.create(
         {
             "role": "system",
             "content": "This is a customer support chatbot designed to help with common inquiries.",
+        },
+        {
             "role": "user",
             "content": "How do I change my tea preferences for the next shipment?",
         }

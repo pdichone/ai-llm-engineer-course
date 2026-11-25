@@ -42,7 +42,9 @@ class ChatBot:
         self.session_id = str(uuid.uuid4())
         self.client = initialize_client(use_ollama)
         self.use_ollama = use_ollama
-        self.model_name = "llama3.2" if use_ollama else "gpt-4o-mini"
+        self.model_name = "llama3.2" if use_ollama else "gpt-6-luna"
+        # gpt-6-luna needs reasoning_effort="none"; Ollama doesn't take it
+        self.extra = {} if use_ollama else {"reasoning_effort": "none"}
 
         # Initialize conversation with a system message
         self.messages = [
@@ -70,7 +72,7 @@ class ChatBot:
             # Generate a response using the API
             start_time = datetime.now()
             response = self.client.chat.completions.create(
-                model=self.model_name, messages=self.messages
+                model=self.model_name, messages=self.messages, **self.extra
             )
             end_time = datetime.now()
 

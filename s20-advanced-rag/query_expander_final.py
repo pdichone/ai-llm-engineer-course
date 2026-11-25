@@ -137,7 +137,7 @@ class QueryExpander:
     """
 
     def __init__(self, temperature: float = 0):
-        self.llm = ChatOpenAI(temperature=temperature, model="gpt-4o-mini")
+        self.llm = ChatOpenAI(temperature=temperature, model="gpt-6-luna", reasoning_effort="none")
 
         self.query_expansion_prompt = PromptTemplate(
             input_variables=["question"],
@@ -222,7 +222,7 @@ class AnswerGenerator:
     """
 
     def __init__(self, temperature: float = 0):
-        self.llm = ChatOpenAI(temperature=temperature, model="gpt-4o-mini")
+        self.llm = ChatOpenAI(temperature=temperature, model="gpt-6-luna", reasoning_effort="none")
 
         self.answer_generation_prompt = PromptTemplate(
             input_variables=["question", "formatted_context"],
@@ -520,7 +520,7 @@ def main():
                             Final Answer:""",
                         )
 
-                        final_response = ChatOpenAI(temperature=0).invoke(
+                        final_response = ChatOpenAI(temperature=0, model="gpt-6-luna", reasoning_effort="none").invoke(
                             final_prompt.format(
                                 question=query, detailed_answer=response_data["answer"]
                             )

@@ -20,7 +20,7 @@ class NewsArticleSummarizer:
         self,
         api_key: str = None,
         model_type: str = "openai",
-        model_name: str = "gpt-4o-mini",
+        model_name: str = "gpt-6-luna",
     ):
         """
         Initialize the summarizer with choice of model
@@ -37,7 +37,7 @@ class NewsArticleSummarizer:
             if not api_key:
                 raise ValueError("API key is required for OpenAI models")
             os.environ["OPENAI_API_KEY"] = api_key
-            self.llm = ChatOpenAI(temperature=0, model_name=model_name)
+            self.llm = ChatOpenAI(temperature=0, model_name=model_name, reasoning_effort="none")
         elif model_type == "ollama":
             # Using ChatOllama with proper configuration
             self.llm = ChatOllama(
@@ -144,7 +144,7 @@ def main():
     openai_summarizer = NewsArticleSummarizer(
         api_key=os.getenv("OPENAI_API_KEY"),
         model_type="openai",
-        model_name="gpt-4o-mini",
+        model_name="gpt-6-luna",
     )
 
     ollama_summarizer = NewsArticleSummarizer(

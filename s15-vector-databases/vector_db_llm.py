@@ -115,7 +115,8 @@ def generate_response(question, relevant_chunks):
     )
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-6-luna",  # gpt-4o-mini shuts down Jan 14, 2027
+        reasoning_effort="none",
         messages=[
             {
                 "role": "system",

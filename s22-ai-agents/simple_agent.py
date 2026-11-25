@@ -9,12 +9,13 @@ load_dotenv()
 openai_key = os.getenv("OPENAI_API_KEY")
 
 
-llm_name = "gpt-4o-mini"
+llm_name = "gpt-6-luna"  # gpt-4o-mini shuts down Jan 14, 2027
 
 client = OpenAI(api_key=openai_key)
 
 response = client.chat.completions.create(
     model=llm_name,
+    reasoning_effort="none",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "who is Nelson Mandela?"},
@@ -40,6 +41,7 @@ class Agent:
     def execute(self):
         response = client.chat.completions.create(
             model=llm_name,
+            reasoning_effort="none",  # gpt-6-luna needs this to accept temperature
             temperature=0.0,
             messages=self.messages,
         )
@@ -97,7 +99,9 @@ PAUSE
 Observation: The combined mass is 6.61371 × 10^24 kg
 
 Answer: The combined mass of Earth and Mars is 6.61371 × 10^24 kg
-""".strip()
+
+Now it's your turn. Begin every reply with Thought:, then an Action line and PAUSE, until you have every Observation you need.
+""".strip()  # gpt-6-luna needs the last line above, or it answers from memory and skips the actions
 
 
 # Implement the functions actions
@@ -189,7 +193,7 @@ agent = Agent(system=prompt)
 
 import re
 
-action_re = re.compile(r"^Action: (\w+): (.*)$")
+action_re = re.compile(r"^Action: (\w+): (.*?)\s*$")  # \s* drops trailing spaces gpt-6-luna sometimes adds
 
 
 # Create a query function

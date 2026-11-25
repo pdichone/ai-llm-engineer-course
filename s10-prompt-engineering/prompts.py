@@ -7,10 +7,11 @@ load_dotenv()
 
 client = OpenAI()
 
-model = "gpt-4o-mini"
+model = "gpt-6-luna"  # gpt-4o-mini shuts down Jan 14, 2027
 # == few-shot learning
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a translator."},
         {
@@ -28,6 +29,7 @@ completion = client.chat.completions.create(
 # Direct prompt example with openai / Zero-shot prompting
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "What is the capital of France?"},
@@ -40,6 +42,7 @@ completion = client.chat.completions.create(
 # == Chain of thought ===
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a math tutor."},
         {
@@ -53,6 +56,7 @@ completion = client.chat.completions.create(
 # == Instructional prompts
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {
             "role": "system",
@@ -69,6 +73,7 @@ completion = client.chat.completions.create(
 # == Role-playing prompts ===
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a character in a fantasy novel."},
         {
@@ -82,6 +87,7 @@ completion = client.chat.completions.create(
 # == Open-ended prompt ==
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a philosopher."},
         {
@@ -95,6 +101,7 @@ completion = client.chat.completions.create(
 # == temperature and top-p sampling
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a creative writer."},
         {"role": "user", "content": "Write a creative tagline for a coffee shop."},
@@ -107,6 +114,7 @@ completion = client.chat.completions.create(
 # === Combining techniques ===
 completion = client.chat.completions.create(
     model=model,
+    reasoning_effort="none",  # gpt-6-luna needs this to accept temperature and top_p
     messages=[
         {"role": "system", "content": "You are a travel blogger."},
         {

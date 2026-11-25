@@ -36,10 +36,12 @@ class LLMModel:
         self.model_type = model_type
         if model_type == "openai":
             self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-            self.model_name = "gpt-4o-mini"
+            self.model_name = "gpt-6-luna"  # gpt-4o-mini shuts down Jan 14, 2027
+            self.extra = {"reasoning_effort": "none"}  # needed for temperature
         else:
             self.client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
             self.model_name = "llama3.2"
+            self.extra = {}  # Ollama doesn't take reasoning_effort
 
     def generate_completion(self, messages):
         try:
@@ -47,6 +49,7 @@ class LLMModel:
                 model=self.model_name,
                 messages=messages,
                 temperature=0.0,  # 0.0 is deterministic
+                **self.extra,
             )
             return response.choices[0].message.content
         except Exception as e:

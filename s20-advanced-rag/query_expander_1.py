@@ -21,7 +21,7 @@ class QueryExpander:
         Args:
             temperature: Controls randomness in LLM response. Lower values make output more focused.
         """
-        self.llm = ChatOpenAI(temperature=temperature, model="gpt-4o-mini")
+        self.llm = ChatOpenAI(temperature=temperature, model="gpt-6-luna", reasoning_effort="none")
 
         # Prompt template for query expansion
         self.query_expansion_prompt = PromptTemplate(

@@ -13,7 +13,7 @@ load_dotenv()
 
 from langchain.chat_models import init_chat_model
 
-model = init_chat_model("gpt-4o-mini", model_provider="openai")
+model = init_chat_model("gpt-6-luna", model_provider="openai", reasoning_effort="none")
 
 messages = [
     SystemMessage("Translate the following from English into Italian"),

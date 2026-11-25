@@ -14,14 +14,17 @@ def simple_chat_without_memory(
     if use_ollama:
         client = OpenAI(base_url="http://localhost:11434/v1/", api_key="ollama")
         model_name = "llama3.2"
+        extra = {}
     else:
         client = OpenAI()
-        model_name = "gpt-4o-mini"
+        model_name = "gpt-6-luna"  # gpt-4o-mini shuts down Jan 14, 2027
+        extra = {"reasoning_effort": "none"}  # OpenAI only, Ollama rejects it
 
     # Each call only includes the current message
     try:
         response = client.chat.completions.create(
-            model=model_name, messages=[{"role": "user", "content": user_input}]
+            model=model_name, messages=[{"role": "user", "content": user_input}],
+            **extra,
         )
         return response.choices[0].message.content
     except Exception as e:

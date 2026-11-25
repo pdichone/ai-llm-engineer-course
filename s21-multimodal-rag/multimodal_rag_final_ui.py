@@ -80,7 +80,7 @@ def query_db(query, results=2):
 # === Run LangChain Vision Model (GPT-4 with image support) ===
 @st.cache_resource
 def get_vision_model():
-    return ChatOpenAI(model="gpt-4o", temperature=0.0)
+    return ChatOpenAI(model="gpt-6-luna", temperature=0.0, reasoning_effort="none")
 
 
 # Vision model and parser

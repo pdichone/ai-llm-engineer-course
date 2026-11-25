@@ -9,7 +9,8 @@ client = OpenAI()
 # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY")) # this is another way to initialize the client
 
 response = client.chat.completions.create(
-    model="gpt-4o-mini",
+    model="gpt-6-luna",  # gpt-4o-mini shuts down Jan 14, 2027
+    reasoning_effort="none",  # fast answers, like gpt-4o-mini
     messages=[
         {"role": "system", "content": "You are a eastern poet."},
         {

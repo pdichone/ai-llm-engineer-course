@@ -139,7 +139,7 @@ import base64
 
 # Instantiate the OpenAI model
 vision_model = ChatOpenAI(
-    model="gpt-4o", temperature=0.0
+    model="gpt-6-luna", temperature=0.0, reasoning_effort="none"
 )  # this model has vision capabilities
 
 # instantiate the output parser

@@ -125,7 +125,7 @@ class VoiceGenerator:
 class VoiceAssistantRAG:
     def __init__(self, elevenlabs_api_key):
         self.whisper_model = whisper.load_model("base")
-        self.llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
+        self.llm = ChatOpenAI(model_name="gpt-6-luna", temperature=0, reasoning_effort="none")
         self.embeddings = OpenAIEmbeddings()
         self.vector_store = None
         self.qa_chain = None
